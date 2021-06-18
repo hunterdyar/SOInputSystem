@@ -162,6 +162,11 @@ namespace Bloops.SOInputSystem
 			return keyBindings;
 		}
 
+		private List<AxisKeyBinding.SerializableAxisKeyBinding> GetSerializedAxisBindings()
+		{
+			return axisBindings;
+		}
+
 		public List<AxisKeyBinding> GetaAxisKeyBindings()
 		{
 			return _axisBindingsMap.Values.ToList();
@@ -169,6 +174,14 @@ namespace Bloops.SOInputSystem
 
 		private void OnValidate()
 		{
+			Refresh();
+		}
+
+		public void Clone(InputBindings other)
+		{
+			keyBindings = other.GetKeyBindings().Select(a => new KeyBinding(a)).ToList();
+			;
+			axisBindings = other.GetSerializedAxisBindings();
 			Refresh();
 		}
 	}

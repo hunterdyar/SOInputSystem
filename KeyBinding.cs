@@ -43,6 +43,15 @@ namespace Bloops.SOInputSystem
             isRebinding = false;
         }
 
+        public KeyBinding(KeyBinding clone)
+        {
+            _identifier = clone._identifier;
+            _keyCode = clone._keyCode;
+            _invalidKeyCodes = clone._invalidKeyCodes;
+            displayName = clone.displayName;
+            isRebinding = false;
+        }
+
         public bool GetKey()
         {
             return Input.GetKey(_keyCode);

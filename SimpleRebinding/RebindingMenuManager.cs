@@ -7,6 +7,7 @@ namespace Bloops.SOInputSystem.SimpleRebinding
 {
 	public class RebindingMenuManager : MonoBehaviour
 	{
+		public InputBindings defaultBindings;
 		public InputBindings bindings;
 		public GameObject rebindButtonPrefab;
 		private List<GameObject> _buttonObjects = new List<GameObject>();
@@ -18,6 +19,13 @@ namespace Bloops.SOInputSystem.SimpleRebinding
 		private void OnDisable()
 		{
 			ClearButtons();
+		}
+
+		public void ResetToDefault()
+		{
+			bindings.Clone(defaultBindings);
+			ClearButtons();
+			DrawChildren();
 		}
 
 		private void DrawChildren()
