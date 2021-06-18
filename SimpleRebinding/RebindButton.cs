@@ -31,6 +31,8 @@ namespace Bloops.SOInputSystem.SimpleRebinding
 			keyCodeText.text = "<Press Any Key>";
 			yield return _binding.Rebind();//waits for key press.
 			keyCodeText.text = _binding.KeyCode.ToString();
+			
+			//save the binding to playerPrefs.
 		}
 		
 		public void SetBinding(KeyBinding binding)
