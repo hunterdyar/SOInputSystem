@@ -25,10 +25,14 @@ namespace Bloops.SOInputSystem
 		private static InputBindings _defaultBindings; 
 
 		[SerializeField] private InputBindings defaultBindings;
-
+		[SerializeField] private bool loadFromPlayerPrefsOnAwake = true;
 		void Awake()
 		{
 			_defaultBindings = defaultBindings;
+			if (loadFromPlayerPrefsOnAwake)
+			{
+				_defaultBindings.LoadFromPlayerPrefs();
+			}
 		}
 	}
 }

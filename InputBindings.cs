@@ -121,12 +121,35 @@ namespace Bloops.SOInputSystem
 
 		public void SaveToPlayerPrefs()
 		{
-			//save keybindings.
+			foreach (KeyBinding kb in keyBindings)
+			{
+				PlayerPrefs.SetInt("kb_"+kb.Identifier, (int) kb.KeyCode);
+			}
+
+			foreach (AxisKeyBinding.SerializableAxisKeyBinding ab in axisBindings)
+			{
+				PlayerPrefs.SetString("ab_" + ab.AxisName + "p", ab.PositiveKeyBindingIdentifier);
+				PlayerPrefs.SetString("ab_" + ab.AxisName + "n", ab.NegativeKeyBindingIdentifier);
+			}
 		}
 
 		public void LoadFromPlayerPrefs()
 		{
-			//save keybindings.
+			foreach (KeyBinding kb in keyBindings)
+			{
+				KeyCode bind = (KeyCode)PlayerPrefs.GetInt("kb_" + kb.Identifier, (int) kb.KeyCode);
+				kb.SetKeyCode(bind);
+			}
+
+			foreach (AxisKeyBinding.SerializableAxisKeyBinding ab in axisBindings)
+			{
+				var pos = PlayerPrefs.GetString("ab_" + ab.AxisName + "p", ab.PositiveKeyBindingIdentifier);
+				var neg = PlayerPrefs.GetString("ab_" + ab.AxisName + "n", ab.NegativeKeyBindingIdentifier);
+				ab.NegativeKeyBindingIdentifier = neg;
+				ab.PositiveKeyBindingIdentifier = pos;
+			}
+			
+			Refresh();
 		}
 
 		public IEnumerator GetRebindRoutine(string input)
@@ -167,7 +190,7 @@ namespace Bloops.SOInputSystem
 			return axisBindings;
 		}
 
-		public List<AxisKeyBinding> GetaAxisKeyBindings()
+		public List<AxisKeyBinding> GetAxisKeyBindings()
 		{
 			return _axisBindingsMap.Values.ToList();
 		}
@@ -180,7 +203,6 @@ namespace Bloops.SOInputSystem
 		public void Clone(InputBindings other)
 		{
 			keyBindings = other.GetKeyBindings().Select(a => new KeyBinding(a)).ToList();
-			;
 			axisBindings = other.GetSerializedAxisBindings();
 			Refresh();
 		}

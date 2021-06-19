@@ -7,7 +7,7 @@ namespace Bloops.SOInputSystem
 	public class AxisKeyBinding : IAxisBinding
 	{
 		[Serializable]
-		public struct SerializableAxisKeyBinding
+		public class SerializableAxisKeyBinding
 		{
 			public string AxisName;
 			public string PositiveKeyBindingIdentifier;

@@ -10,7 +10,7 @@ namespace Bloops.SOInputSystem.SimpleRebinding
 		[SerializeField] private Text labelText;
 		[SerializeField] private Button button;
 		private KeyBinding _binding;
-
+		private InputBindings _bindings;
 		private void Start()
 		{
 			button.onClick.AddListener(OnButtonPress);
@@ -32,11 +32,13 @@ namespace Bloops.SOInputSystem.SimpleRebinding
 			yield return _binding.Rebind();//waits for key press.
 			keyCodeText.text = _binding.KeyCode.ToString();
 			
-			//save the binding to playerPrefs.
+			//instantly save.
+			_bindings.SaveToPlayerPrefs();
 		}
 		
-		public void SetBinding(KeyBinding binding)
+		public void SetBinding(InputBindings inputBindings, KeyBinding binding)
 		{
+			_bindings = inputBindings;
 			_binding = binding;
 		}
 	}
