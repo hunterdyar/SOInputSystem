@@ -16,5 +16,6 @@ On this, you can call GetKey, GetKeyUp, GetKeyDown, and GetAxis, passing in the 
 The short version is to start the Rebind coroutine, which will listen for the next key press. See the example script.
 
 ## Issues
-- Player prefs saving not completed yet.
+- No proper joystick support yet.
+- Axis support is not complete.
 - Multiple Keys for a single binding is not done yet (ie: arrows and WASD).
