@@ -123,13 +123,13 @@ namespace Bloops.SOInputSystem
 		{
 			foreach (KeyBinding kb in keyBindings)
 			{
-				PlayerPrefs.SetInt("kb_"+kb.Identifier, (int) kb.KeyCode);
+				PlayerPrefs.SetInt(name + "_kb_" +kb.Identifier, (int) kb.KeyCode);
 			}
 
 			foreach (AxisKeyBinding.SerializableAxisKeyBinding ab in axisBindings)
 			{
-				PlayerPrefs.SetString("ab_" + ab.AxisName + "p", ab.PositiveKeyBindingIdentifier);
-				PlayerPrefs.SetString("ab_" + ab.AxisName + "n", ab.NegativeKeyBindingIdentifier);
+				PlayerPrefs.SetString(name + "_ab_" + ab.AxisName + "p", ab.PositiveKeyBindingIdentifier);
+				PlayerPrefs.SetString(name + "_ab_" + ab.AxisName + "n", ab.NegativeKeyBindingIdentifier);
 			}
 		}
 
@@ -137,14 +137,14 @@ namespace Bloops.SOInputSystem
 		{
 			foreach (KeyBinding kb in keyBindings)
 			{
-				KeyCode bind = (KeyCode)PlayerPrefs.GetInt("kb_" + kb.Identifier, (int) kb.KeyCode);
+				KeyCode bind = (KeyCode)PlayerPrefs.GetInt(name+"_kb_" + kb.Identifier, (int) kb.KeyCode);
 				kb.SetKeyCode(bind);
 			}
 
 			foreach (AxisKeyBinding.SerializableAxisKeyBinding ab in axisBindings)
 			{
-				var pos = PlayerPrefs.GetString("ab_" + ab.AxisName + "p", ab.PositiveKeyBindingIdentifier);
-				var neg = PlayerPrefs.GetString("ab_" + ab.AxisName + "n", ab.NegativeKeyBindingIdentifier);
+				var pos = PlayerPrefs.GetString(name+"_ab_" + ab.AxisName + "p", ab.PositiveKeyBindingIdentifier);
+				var neg = PlayerPrefs.GetString(name+"_ab_" + ab.AxisName + "n", ab.NegativeKeyBindingIdentifier);
 				ab.NegativeKeyBindingIdentifier = neg;
 				ab.PositiveKeyBindingIdentifier = pos;
 			}
